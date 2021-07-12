@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
-import { Button, SafeAreaView, StyleSheet, VirtualizedList } from 'react-native';
+import { SafeAreaView, StyleSheet, VirtualizedList } from 'react-native';
 import Constants from 'expo-constants';
 
 import ClockDetail from './screens/ClockDetail';
 import { allClocks } from './App.api';
 import Clock from './models/Clock';
+import Header from './screens/Header';
 type AppProps = {
 }
 
@@ -18,7 +19,6 @@ export default class App extends Component<AppProps, AppState> {
 
   constructor(props: AppProps) {
     super(props);
-
     this.state = {
       clocks: allClocks,
       date: new Date(),
@@ -50,9 +50,11 @@ export default class App extends Component<AppProps, AppState> {
     const { clocks, date } = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar />
-        <Button title="PLAY" onPress={this.playClocks} />
-        <Button title="STOP" onPress={this.stopClocks} />
+      <StatusBar />
+        <Header
+          playClocks={this.playClocks}
+          stopClocks={this.stopClocks}
+        />
         <VirtualizedList
           data={clocks}
           initialNumToRender={1}
