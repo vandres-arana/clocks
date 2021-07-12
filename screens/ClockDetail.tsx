@@ -4,15 +4,11 @@ import { Text, StyleSheet, View } from 'react-native'
 type ClockProps = {
     name: string,
     date: Date,
-    country: string,
-    timeZone: string,
+    locale: string | undefined,
+    timeZone: string | undefined,
 }
 
-type ClockState = {
-    isStopped: boolean,
-}
-
-export default class Clock extends Component<ClockProps, ClockState> {
+export default class ClockDetail extends Component<ClockProps> {
 
     constructor(props: ClockProps) {
         super(props);
@@ -22,20 +18,16 @@ export default class Clock extends Component<ClockProps, ClockState> {
         };
     }
 
-    stopClock = () => {
-        const { isStopped } = this.state;
-        this.setState({
-            isStopped: !isStopped
-        })
-    }
-
     render() {
         return (
             <View>
                 <Text>
-                    {this.props.date.toLocaleTimeString(this.props.country, {
+                    {this.props.date.toLocaleTimeString(this.props.locale, {
                         timeZone: this.props.timeZone
                     })}
+                </Text>
+                <Text>
+                    {this.props.name}
                 </Text>
             </View>
         )

@@ -1,12 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native';
-import Clock from './Clock';
+import { Button, SafeAreaView, StyleSheet, VirtualizedList } from 'react-native';
+import Constants from 'expo-constants';
 
+import ClockDetail from './screens/ClockDetail';
+import { allClocks } from './App.api';
+import Clock from './models/Clock';
 type AppProps = {
 }
 
 type AppState = {
+  clocks: Clock[],
   date: Date,
   isStopped: boolean,
 }
@@ -16,6 +20,7 @@ export default class App extends Component<AppProps, AppState> {
     super(props);
 
     this.state = {
+      clocks: allClocks,
       date: new Date(),
       isStopped: false
     };
@@ -31,30 +36,37 @@ export default class App extends Component<AppProps, AppState> {
   }
 
   playClocks = () => {
-    console.log("start clock")
     this.setState({
       isStopped: false
     })
   }
   stopClocks = () => {
-    console.log("stop clock")
     this.setState({
       isStopped: true
     })
   }
 
   render() {
+    const { clocks, date } = this.state;
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar />
         <Button title="PLAY" onPress={this.playClocks} />
         <Button title="STOP" onPress={this.stopClocks} />
-        <Clock
-          name="United Kingdom"
-          date={this.state.date}
-          country={"en-GB"}
-          timeZone={"Europe/London"}
+        <VirtualizedList
+          data={clocks}
+          initialNumToRender={1}
+          renderItem={({ item }) => (
+            <ClockDetail
+              {...item}
+              date={date}
+            />
+          )}
+          keyExtractor={(item: Clock) => item.id.toString()}
+          getItemCount={() => clocks.length}
+          getItem={(data, index) => clocks[index]}
         />
-      </View>
+      </SafeAreaView>
     )
   }
 }
@@ -63,7 +75,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    margin: Constants.statusBarHeight
   },
 });
