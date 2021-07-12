@@ -3,41 +3,41 @@ import Clock from './models/Clock';
 export const allClocks: Clock[] = [{
     id: 1,
     name: "Local",
-    locale: undefined,
+    locale: "es",
     timeZone: undefined
 }, {
     id: 2,
     name: "Brazil East",
-    locale: "pt-br",
+    locale: "es",
     timeZone: "Brazil/East"
 }, {
     id: 3,
     name: "Mexico",
-    locale: "es-MX",
+    locale: "es",
     timeZone: "Mexico/General"
 }, {
     id: 4,
     name: "Spain",
-    locale: "es-ES",
+    locale: "es",
     timeZone: "Europe/Madrid"
 }, {
     id: 5,
     name: "Germany",
-    locale: "de-DE",
+    locale: "es",
     timeZone: "Europe/Berlin"
 }, {
     id: 6,
     name: "Turkey",
-    locale: "tr",
+    locale: "es",
     timeZone: "Turkey"
 }, {
     id: 7,
     name: "India",
-    locale: "hi",
+    locale: "es",
     timeZone: "Asia/Hong_Kong"
 }, {
     id: 8,
     name: "Japan",
-    locale: "ja",
+    locale: "es",
     timeZone: "Asia/Tokyo"
 }]
