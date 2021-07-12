@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Button, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
 
 type HeaderProps = {
     playClocks: () => void,
@@ -7,7 +7,7 @@ type HeaderProps = {
 }
 export default class Header extends Component<HeaderProps> {
     constructor(props: HeaderProps) {
-        super(props)
+        super(props);
     }
     render() {
         const { playClocks, stopClocks } = this.props;
@@ -20,7 +20,7 @@ export default class Header extends Component<HeaderProps> {
                     <Text>STOP</Text>
                 </TouchableOpacity>
             </View>
-        )
+        );
     }
 }
 
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 20
+        padding: 20,
     },
     button: {
         alignItems: 'center',
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
         height: 40,
         backgroundColor: '#006400',
         borderRadius: 10,
-        marginHorizontal: 40
+        marginHorizontal: 40,
     }
 })

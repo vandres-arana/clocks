@@ -22,7 +22,7 @@ export default class App extends Component<AppProps, AppState> {
     this.state = {
       clocks: allClocks,
       date: new Date(),
-      isStopped: false
+      isStopped: false,
     };
     setInterval(this.updateDate, 1000)
   }
@@ -30,27 +30,27 @@ export default class App extends Component<AppProps, AppState> {
   updateDate = () => {
     if (!this.state.isStopped) {
       this.setState({
-        date: new Date()
+        date: new Date(),
       });
     }
   }
 
   playClocks = () => {
     this.setState({
-      isStopped: false
-    })
+      isStopped: false,
+    });
   }
   stopClocks = () => {
     this.setState({
-      isStopped: true
-    })
+      isStopped: true,
+    });
   }
 
   render() {
     const { clocks, date } = this.state;
     return (
       <SafeAreaView style={styles.container}>
-      <StatusBar />
+        <StatusBar />
         <Header
           playClocks={this.playClocks}
           stopClocks={this.stopClocks}
@@ -69,7 +69,7 @@ export default class App extends Component<AppProps, AppState> {
           getItem={(data, index) => clocks[index]}
         />
       </SafeAreaView>
-    )
+    );
   }
 }
 
@@ -77,6 +77,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    margin: Constants.statusBarHeight
+    margin: Constants.statusBarHeight,
   },
 });
