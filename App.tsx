@@ -38,8 +38,10 @@ export default class App extends Component<AppProps, AppState> {
   playClocks = () => {
     this.setState({
       isStopped: false,
+      date: new Date(),
     });
   }
+  
   stopClocks = () => {
     this.setState({
       isStopped: true,
