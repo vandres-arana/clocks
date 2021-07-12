@@ -4,7 +4,7 @@ export const allClocks: Clock[] = [{
     id: 1,
     name: "Local",
     locale: "es",
-    timeZone: undefined
+    timeZone: "America/La_Paz"
 }, {
     id: 2,
     name: "Brazil East",

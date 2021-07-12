@@ -1,11 +1,12 @@
+import moment from 'moment-timezone';
 import React, { Component } from 'react'
 import { Text, StyleSheet, View } from 'react-native'
 
 type ClockProps = {
     name: string,
     date: Date,
-    locale: string | undefined,
-    timeZone: string | undefined,
+    locale: string,
+    timeZone: string,
 }
 
 export default class ClockDetail extends Component<ClockProps> {
@@ -21,9 +22,7 @@ export default class ClockDetail extends Component<ClockProps> {
         return (
             <View style={styles.container}>
                 <Text style={styles.hour}>
-                    {this.props.date.toLocaleTimeString(this.props.locale, {
-                        timeZone: this.props.timeZone
-                    })}
+                    {moment.tz(this.props.timeZone).format('hh:mm:ss a')}
                 </Text>
                 <Text style={styles.countryName}>
                     {this.props.name}
