@@ -9,27 +9,17 @@ type ClockProps = {
     timeZone: string,
 }
 
-export default class ClockDetail extends Component<ClockProps> {
-
-    constructor(props: ClockProps) {
-        super(props);
-        this.state = {
-            isStopped: false,
-        };
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.hour}>
-                    {moment.tz(this.props.timeZone).format('hh:mm:ss a')}
-                </Text>
-                <Text style={styles.countryName}>
-                    {this.props.name}
-                </Text>
-            </View>
-        );
-    }
+export default function ClockDetail(props: ClockProps) {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.hour}>
+                {moment.tz(props.timeZone).format('hh:mm:ss a')}
+            </Text>
+            <Text style={styles.countryName}>
+                {props.name}
+            </Text>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

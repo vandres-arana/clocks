@@ -7,6 +7,7 @@ import ClockDetail from './screens/ClockDetail';
 import { allClocks } from './App.api';
 import Clock from './models/Clock';
 import Header from './screens/Header';
+
 type AppProps = {
 }
 

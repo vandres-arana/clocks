@@ -5,23 +5,18 @@ type HeaderProps = {
     playClocks: () => void,
     stopClocks: () => void,
 }
-export default class Header extends Component<HeaderProps> {
-    constructor(props: HeaderProps) {
-        super(props);
-    }
-    render() {
-        const { playClocks, stopClocks } = this.props;
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity onPress={playClocks} style={styles.button}>
-                    <Text>PLAY</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={stopClocks} style={[styles.button, { backgroundColor: '#de1738'}]}>
-                    <Text>STOP</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+
+export default function Header(props: HeaderProps) {
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity onPress={props.playClocks} style={styles.button}>
+                <Text>PLAY</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={props.stopClocks} style={[styles.button, { backgroundColor: '#de1738'}]}>
+                <Text>STOP</Text>
+            </TouchableOpacity>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
