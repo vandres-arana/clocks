@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
 
 type HeaderProps = {
@@ -6,13 +6,16 @@ type HeaderProps = {
     stopClocks: () => void,
 }
 
-export default function Header(props: HeaderProps) {
+const Header: React.FC<HeaderProps> = ({
+    playClocks,
+    stopClocks
+}) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={props.playClocks} style={styles.button}>
+            <TouchableOpacity onPress={playClocks} style={styles.button}>
                 <Text>PLAY</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={props.stopClocks} style={[styles.button, { backgroundColor: '#de1738'}]}>
+            <TouchableOpacity onPress={stopClocks} style={[styles.button, { backgroundColor: '#de1738' }]}>
                 <Text>STOP</Text>
             </TouchableOpacity>
         </View>
@@ -35,3 +38,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 40,
     }
 })
+
+export default Header;
