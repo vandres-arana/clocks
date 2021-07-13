@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, VirtualizedList } from 'react-native';
 import Constants from 'expo-constants';
 
@@ -8,72 +8,49 @@ import { allClocks } from './App.api';
 import Clock from './models/Clock';
 import Header from './screens/Header';
 
-type AppProps = {
-}
-
-type AppState = {
-  clocks: Clock[],
-  date: Date,
-  isStopped: boolean,
-}
-export default class App extends Component<AppProps, AppState> {
-
-  constructor(props: AppProps) {
-    super(props);
-    this.state = {
-      clocks: allClocks,
-      date: new Date(),
-      isStopped: false,
-    };
-    setInterval(this.updateDate, 1000)
-  }
-
-  updateDate = () => {
-    if (!this.state.isStopped) {
-      this.setState({
-        date: new Date(),
-      });
+const App: React.FC = () => {
+  const clocks: Clock[] = allClocks;
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [isStopped, setIsStopped] = useState(false);
+  console.log("HOLAS")
+  const updateDate = () => {
+    if (!isStopped) {
+      setCurrentDate(new Date());
     }
   }
 
-  playClocks = () => {
-    this.setState({
-      isStopped: false,
-      date: new Date(),
-    });
-  }
-  
-  stopClocks = () => {
-    this.setState({
-      isStopped: true,
-    });
+  const playClocks = () => {
+    setIsStopped(false);
   }
 
-  render() {
-    const { clocks, date } = this.state;
-    return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar />
-        <Header
-          playClocks={this.playClocks}
-          stopClocks={this.stopClocks}
-        />
-        <VirtualizedList
-          data={clocks}
-          initialNumToRender={1}
-          renderItem={({ item }) => (
-            <ClockDetail
-              {...item}
-              date={date}
-            />
-          )}
-          keyExtractor={(item: Clock) => item.id.toString()}
-          getItemCount={() => clocks.length}
-          getItem={(data, index) => clocks[index]}
-        />
-      </SafeAreaView>
-    );
+  const stopClocks = () => {
+    setIsStopped(true);
   }
+
+  setInterval(updateDate, 1000);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar />
+      <Header
+        playClocks={playClocks}
+        stopClocks={stopClocks}
+      />
+      <VirtualizedList
+        data={clocks}
+        initialNumToRender={1}
+        renderItem={({ item }) => (
+          <ClockDetail
+            {...item}
+            date={currentDate}
+          />
+        )}
+        keyExtractor={(item: Clock) => item.id.toString()}
+        getItemCount={() => clocks.length}
+        getItem={(data, index) => clocks[index]}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -83,3 +60,5 @@ const styles = StyleSheet.create({
     margin: Constants.statusBarHeight,
   },
 });
+
+export default App;
