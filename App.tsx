@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const clocks: Clock[] = allClocks;
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isStopped, setIsStopped] = useState(false);
-  console.log("HOLAS")
+  
   const updateDate = () => {
     if (!isStopped) {
       setCurrentDate(new Date());
