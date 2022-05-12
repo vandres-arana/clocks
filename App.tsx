@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { SafeAreaView, StyleSheet, VirtualizedList } from 'react-native';
 import Constants from 'expo-constants';
 
@@ -12,7 +12,8 @@ const App: React.FC = () => {
   const clocks: Clock[] = allClocks;
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isStopped, setIsStopped] = useState(false);
-  
+  const timer = useRef<any>(null);
+
   const updateDate = () => {
     if (!isStopped) {
       setCurrentDate(new Date());
@@ -20,14 +21,26 @@ const App: React.FC = () => {
   }
 
   const playClocks = () => {
+    timer.current = setInterval(updateDate, 1000);
     setIsStopped(false);
   }
 
   const stopClocks = () => {
+    console.log("stop")
     setIsStopped(true);
   }
 
-  setInterval(updateDate, 1000);
+  useEffect(() => {
+    console.log("app")
+    timer.current = setInterval(updateDate, 1000);
+  }, [])
+
+  useEffect(() => {
+    console.log("changed", isStopped);
+    if (isStopped) {
+      clearInterval(timer.current);
+    }
+  }, [isStopped])
 
   return (
     <SafeAreaView style={styles.container}>
